@@ -12,7 +12,7 @@ from decode import decrypt_frame, convert_to_dict, check_and_encode_frame
 
 def write_to_database(influx_writer, name, code, value, date_time):
     try:
-        p = Point("smartmeter_"+name).tag("Code", code).field("value", value).time(date_time)
+        p = Point("smartmeter."+name).tag("Code", code).field("value", value).time(date_time)
         influx_writer.write(bucket=args.influxDatabase, record=p)
     except Exception as e:
         print("Could not write to influxdb")
