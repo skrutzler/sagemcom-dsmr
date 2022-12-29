@@ -12,7 +12,7 @@ from decode import decrypt_frame, convert_to_dict, check_and_encode_frame
 
 def write_to_database(influx_writer, name, code, value, date_time):
     try:
-        p = Point("smartmeter."+name).tag("Code", code).field("value", value)  # .time(date_time)
+        p = Point("meter."+name).tag("Code", code).field("value", value)  # .time(date_time)
         influx_writer.write(bucket=args.influxDatabase, record=p)
     except Exception as e:
         print("Could not write to influxdb")
@@ -54,13 +54,13 @@ if __name__ == "__main__":
                         data_date_time = datetime.strptime(
                             str(list(response_as_dict["0-0:1.0.0"].values())[0]['value']), '%y%m%d%H%M%S')
                         write_to_database(writer, "current_consumed_active_power", "1-0:1.7.0",
-                                          str(list(response_as_dict["1-0:1.7.0"].values())[0]['value']), data_date_time)
+                                          (list(response_as_dict["1-0:1.7.0"].values())[0]['value']), data_date_time)
                         write_to_database(writer, "current_provided_active_power", "1-0:2.7.0",
-                                          str(list(response_as_dict["1-0:2.7.0"].values())[0]['value']), data_date_time)
+                                          (list(response_as_dict["1-0:2.7.0"].values())[0]['value']), data_date_time)
                         write_to_database(writer, "total_consumed_energy", "1-0:1.8.0",
-                                          str(list(response_as_dict["1-0:1.8.0"].values())[0]['value']), data_date_time)
+                                          (list(response_as_dict["1-0:1.8.0"].values())[0]['value']), data_date_time)
                         write_to_database(writer, "total_provided_energy", "1-0:2.8.0",
-                                          str(list(response_as_dict["1-0:2.8.0"].values())[0]['value']), data_date_time)
+                                          (list(response_as_dict["1-0:2.8.0"].values())[0]['value']), data_date_time)
 
                         if args.verbose:
                             print("Current consumed power: " + str(response_as_dict["1-0:1.7.0"]))
