@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     while True:
         try:
-            with InfluxDBClient(url="http://localhost:8086", verify_ssl=False, org="smartmeter") as client:
+            with InfluxDBClient(url=f'http://%s:%s'.format(args.influxhost, args.influxport), verify_ssl=False, org="smartmeter") as client:
                 with client.write_api(write_options=SYNCHRONOUS) as writer:
                     with Serial(args.device, 115200, timeout=6.0,
                                 bytesize=EIGHTBITS, parity=PARITY_NONE, stopbits=STOPBITS_ONE, rtscts=False) as ser:
