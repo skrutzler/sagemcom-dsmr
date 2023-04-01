@@ -52,7 +52,7 @@ if __name__ == "__main__":
                         response_as_dict = convert_to_dict(encoded_frame)
 
                         data_date_time = datetime.strptime(
-                            str(list(response_as_dict["0-0:1.0.0"].values())[0]['value']), '%y%m%d%H%M%S')
+                           "".join(list(list(response_as_dict["0-0:1.0.0"].values())[0].values())), '%y%m%d%H%M%S')
                         write_to_database(writer, "current_consumed_active_power", "1-0:1.7.0",
                                           (list(response_as_dict["1-0:1.7.0"].values())[0]['value']), data_date_time)
                         write_to_database(writer, "current_provided_active_power", "1-0:2.7.0",
