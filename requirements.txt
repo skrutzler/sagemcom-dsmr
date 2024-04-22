@@ -2,3 +2,5 @@ pyserial~=3.5
 crccheck~=1.2.0
 cryptography~=38.0.1
 influxdb_client~=1.34
+flask==2.3.3
+Waitress==2.1.2
