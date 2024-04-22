@@ -29,10 +29,10 @@ def get_serial_data():
                 print("Total consumed energy (Counter): " + str(response_as_dict["1-0:1.8.0"]))
                 print("Total provided energy (Counter): " + str(response_as_dict["1-0:2.8.0"]))
 
-            return jsonify({'current_consumed_active_power': list(response_as_dict["1-0:1.7.0"].values())[0]['value']},
-                           {'current_provided_active_power': list(response_as_dict["1-0:2.7.0"].values())[0]['value']},
-                           {'total_consumed_energy': list(response_as_dict["1-0:1.8.0"].values())[0]['value']},
-                           {'total_provided_energy': list(response_as_dict["1-0:2.8.0"].values())[0]['value']})
+            return jsonify({'current_consumed_active_power': list(response_as_dict["1-0:1.7.0"].values())[0]['value'],
+                            'current_provided_active_power': list(response_as_dict["1-0:2.7.0"].values())[0]['value'],
+                            'total_consumed_energy': list(response_as_dict["1-0:1.8.0"].values())[0]['value'],
+                            'total_provided_energy': list(response_as_dict["1-0:2.8.0"].values())[0]['value']})
     except Exception as e:
         print(e)
         return "Error while reading from serial port: {}".format(str(e)), 400
